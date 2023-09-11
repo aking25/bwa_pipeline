@@ -1,5 +1,5 @@
 process CALL_CONSENSUS { 
-    // errorStrategy 'ignore'
+    errorStrategy 'ignore'
     publishDir "${params.out_dir}/trimmed_bams/ont/", mode: 'copy', pattern: '**primertrimmed.rg.sorted.bam'
     publishDir "${params.out_dir}/consensus_sequences/ont/", mode: 'copy', pattern: '*.fa'
     publishDir "${params.out_dir}/merged_aligned_bams/ont/", mode: 'copy', pattern: '**[!primer][!trimmed].sorted.bam'

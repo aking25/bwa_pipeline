@@ -54,6 +54,7 @@
         * `normalize`: length to normalize reads
 3. Run the command:   
     ```
+    mv template.config nextflow.config
     nextflow run main.nf
     ```
 
