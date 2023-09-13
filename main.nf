@@ -2,14 +2,15 @@
 nextflow.enable.dsl=2
 
 if (params.platform == 'illumina') {
-    include { ILLUMINA } from './workflows/illumina.nf'
+    include { ILLUMINA; ILLUMINA_FROM_FASTQ } from './workflows/illumina.nf'
 } else if (params.platform == 'ont') {
     include { NANOPORE } from './workflows/nanopore.nf'
 }
 
 workflow BWA_PIPELINE {
     if (params.platform == 'illumina') {
-        ILLUMINA()
+        if (!params.fastq) { ILLUMINA() } 
+        else { ILLUMINA_FROM_FASTQ() }
     } else if (params.platform == 'ont') {
         NANOPORE()
     }

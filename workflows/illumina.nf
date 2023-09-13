@@ -27,3 +27,23 @@ workflow ILLUMINA {
     SUMMARY_REPORT(QC_REPORT.out, MERGE_COVERAGE_STATS.out.coverage_tsv, MERGE_COVERAGE_STATS.out.coverage_png, MERGE_MAPPED_UNMAPPED.out)
 }
 
+workflow ILLUMINA_FROM_FASTQ {
+    fastq = Channel.fromPath("$params.fastq/*.fastq.gz")
+    fastq | toSortedList | flatten | collate(2) | ALIGN_TRIM_CONSENSUS
+
+    MAPPED_UNMAPPED(ALIGN_TRIM_CONSENSUS.out.mapped_stats) | collect | MERGE_MAPPED_UNMAPPED
+
+    COVERAGE_STATS(ALIGN_TRIM_CONSENSUS.out.coverage_stats) | collect | MERGE_COVERAGE_STATS
+
+    CALL_VARIANTS(ALIGN_TRIM_CONSENSUS.out.trimmed_bam, ALIGN_TRIM_CONSENSUS.out.pileup)
+
+    QC_REPORT(MERGE_COVERAGE_STATS.out.coverage_tsv, MERGE_MAPPED_UNMAPPED.out, ALIGN_TRIM_CONSENSUS.out.trim_log.collect())
+
+    COUNT_VARIANTS(CALL_VARIANTS.out.collect(), QC_REPORT.out)
+
+    CALL_DEPTH(ALIGN_TRIM_CONSENSUS.out.trimmed_bam)
+
+    SUMMARY_REPORT(QC_REPORT.out, MERGE_COVERAGE_STATS.out.coverage_tsv, MERGE_COVERAGE_STATS.out.coverage_png, MERGE_MAPPED_UNMAPPED.out)
+}
+
+
