@@ -1,5 +1,5 @@
 process QC_REPORT {
-    publishDir "${params.out_dir}", mode: 'copy'
+    publishDir "${params.out_dir}", mode: 'link'
     input:
     path coverage_report
     path mapped_unmapped_report
@@ -15,7 +15,7 @@ process QC_REPORT {
 }
 
 process SUMMARY_REPORT {
-    publishDir "${params.out_dir}", mode: 'copy'
+    publishDir "${params.out_dir}", mode: 'link'
     input: 
     path qc_report
     path coverage_report_tsv

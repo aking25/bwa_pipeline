@@ -15,7 +15,7 @@ process COVERAGE_STATS {
 }
 
 process MERGE_COVERAGE_STATS {
-    publishDir "${params.out_dir}/trimmed_bams/ont/reports", mode: 'copy'
+    publishDir "${params.out_dir}/trimmed_bams/ont/reports", mode: 'link'
     input:
     path(reports)
 
@@ -50,7 +50,7 @@ process MAPPED_UNMAPPED {
 }
 
 process MERGE_MAPPED_UNMAPPED {
-    publishDir "${params.out_dir}/reports/ont", mode: 'copy'  
+    publishDir "${params.out_dir}/reports/ont", mode: 'link'  
     input:
     path(reports)
 

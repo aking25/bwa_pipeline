@@ -1,5 +1,5 @@
 process ALIGN_READS {
-    publishDir "${params.out_dir}/merged_aligned_bams/illumina", mode: 'copy', pattern: '*.bam'
+    publishDir "${params.out_dir}/merged_aligned_bams/illumina", mode: 'link', pattern: '*.bam'
     input:
     path reads
     
@@ -35,7 +35,7 @@ process MAPPED_UNMAPPED {
 }
 
 process MERGE_MAPPED_UNMAPPED {
-    publishDir "${params.out_dir}/reports/illumina", mode: 'copy'  
+    publishDir "${params.out_dir}/reports/illumina", mode: 'link'  
     input:
     path(reports)
 

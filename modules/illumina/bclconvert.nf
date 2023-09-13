@@ -1,5 +1,5 @@
 process BCLCONVERT {
-    publishDir "${params.out_dir}/merged_fastq/illumina", mode: 'copy'
+    publishDir "${params.out_dir}/merged_fastq/illumina", mode: 'link'
     output:
     path("fastq/**[!Undetermined]_S[0-9]*_R{1,2}_001.fastq.gz")
     

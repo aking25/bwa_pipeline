@@ -1,5 +1,5 @@
 process CALL_VARIANTS {
-    publishDir "${params.out_dir}/variants/illumina", mode: 'copy'
+    publishDir "${params.out_dir}/variants/illumina", mode: 'link'
     input:
     tuple val(sample), path(trimmed_sorted_bam)
     path pileup
@@ -15,7 +15,7 @@ process CALL_VARIANTS {
 }
 
 process COUNT_VARIANTS {
-    publishDir "${params.out_dir}/variants/illumina", mode: 'copy'
+    publishDir "${params.out_dir}/variants/illumina", mode: 'link'
     input:
     path(samples_tsv)
     path(qc_report)

@@ -1,8 +1,8 @@
 process CALL_CONSENSUS { 
     errorStrategy 'ignore'
-    publishDir "${params.out_dir}/trimmed_bams/ont/", mode: 'copy', pattern: '**primertrimmed.rg.sorted.bam'
-    publishDir "${params.out_dir}/consensus_sequences/ont/", mode: 'copy', pattern: '*.fa'
-    publishDir "${params.out_dir}/merged_aligned_bams/ont/", mode: 'copy', pattern: '**[!primer][!trimmed].sorted.bam'
+    publishDir "${params.out_dir}/trimmed_bams/ont/", mode: 'link', pattern: '**primertrimmed.rg.sorted.bam'
+    publishDir "${params.out_dir}/consensus_sequences/ont/", mode: 'link', pattern: '*.fa'
+    publishDir "${params.out_dir}/merged_aligned_bams/ont/", mode: 'link', pattern: '**[!primer][!trimmed].sorted.bam'
     input:
     tuple val(sample_id), path(fastq)
     path(scheme_directory)

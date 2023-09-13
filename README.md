@@ -26,7 +26,7 @@
 
 ## Usage
 
-1. Open `nextflow.config` and set the following parameters:
+1. Open `template.config` and set the following parameters:
     * `platform`: the sequencing platform (*illumina* or *ont*) 
     * `out_dir`: the directory to output the files to
     * `threads`: the number of threads to use

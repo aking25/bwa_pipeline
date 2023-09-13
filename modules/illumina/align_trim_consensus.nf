@@ -1,8 +1,8 @@
 process ALIGN_TRIM_CONSENSUS {
-    publishDir "${params.out_dir}/merged_aligned_bams/illumina" , mode: 'copy', pattern: '**[!trimmed].sorted.ba*'
-    publishDir "${params.out_dir}/trimmed_bams/illumina"        , mode: 'copy', pattern: '*.trimmed.sorted.ba*'
-    publishDir "${params.out_dir}/consensus_sequences/illumina" , mode: 'copy', pattern: '*.fa'
-    publishDir "${params.out_dir}/logs/consensus_sequences"     , mode: 'copy', pattern: '*_consensus.log'
+    publishDir "${params.out_dir}/merged_aligned_bams/illumina" , mode: 'link', pattern: '**[!trimmed].sorted.ba*'
+    publishDir "${params.out_dir}/trimmed_bams/illumina"        , mode: 'link', pattern: '*.trimmed.sorted.ba*'
+    publishDir "${params.out_dir}/consensus_sequences/illumina" , mode: 'link', pattern: '*.fa'
+    publishDir "${params.out_dir}/logs/consensus_sequences"     , mode: 'link', pattern: '*_consensus.log'
     input:
     path reads
 

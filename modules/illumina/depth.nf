@@ -1,5 +1,5 @@
 process CALL_DEPTH {
-    publishDir "${params.out_dir}/depth/illumina", mode: 'copy'
+    publishDir "${params.out_dir}/depth/illumina", mode: 'link'
     input:
     tuple val(sample), path(trimmed_sorted_bam)
 

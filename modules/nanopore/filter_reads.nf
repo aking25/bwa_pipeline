@@ -1,5 +1,5 @@
 process FILTER_READS {
-    publishDir "${params.out_dir}/merged_fastq/ont", mode: 'copy'
+    publishDir "${params.out_dir}/merged_fastq/ont", mode: 'link'
     input:
     tuple val(sample_id), path(fastq)
 
