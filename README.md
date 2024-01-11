@@ -24,6 +24,12 @@
 4. Call consensus (`artic minion`)
 5. Mapping/coverage stats (`samtools`)
 
+### Element
+
+1. Basecalling (`bases2fastq`)
+
+Steps 2-7 are the same as Illumina steps
+
 ## Usage
 
 1. Open `template.config` and set the following parameters:
@@ -52,6 +58,9 @@
         * `max_readlen`: max read length for filtering
         * `medaka_model`: medaka model for artic minion
         * `normalize`: length to normalize reads
+    3. element
+        * `element_input`: directory with element sequencing data
+        * *relies on Illumina options `gff3_file`, `ref_fasta`, `reference`*
 3. Run the command:   
     ```
     mv template.config nextflow.config

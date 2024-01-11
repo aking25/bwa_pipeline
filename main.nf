@@ -5,6 +5,8 @@ if (params.platform == 'illumina') {
     include { ILLUMINA; ILLUMINA_FROM_FASTQ } from './workflows/illumina.nf'
 } else if (params.platform == 'ont') {
     include { NANOPORE } from './workflows/nanopore.nf'
+} else if (params.platform == 'element') {
+    include { ELEMENT } from './workflows/element.nf'
 }
 
 workflow BWA_PIPELINE {
@@ -13,6 +15,8 @@ workflow BWA_PIPELINE {
         else { ILLUMINA_FROM_FASTQ() }
     } else if (params.platform == 'ont') {
         NANOPORE()
+    } else if (params.platform == 'element') {
+        ELEMENT()
     }
 }
 
