@@ -6,6 +6,7 @@ process CALL_DEPTH {
     output:
     path "${sample}.depth"
 
+    conda 'bioconda::samtools'
     shell:
     '''
     samtools depth -d 0 -Q 0 -q 0 -aa !{trimmed_sorted_bam} > !{sample}.depth

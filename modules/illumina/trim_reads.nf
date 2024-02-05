@@ -46,6 +46,7 @@ process MERGE_COVERAGE_STATS {
     path "coverage_report.tsv", emit: coverage_tsv
     path "coverage_report.png", emit: coverage_png
 
+    conda 'gnuplot'
     shell:
     '''
     echo -e "SAMPLE\tCOVERAGE\tAVG_DEPTH\tMIN\tMAX\tZERO_DEPTH" > coverage_report.tsv

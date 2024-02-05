@@ -11,7 +11,7 @@ include { QC_REPORT; SUMMARY_REPORT } from '../modules/illumina/reports.nf'
 
 // same as Illumina steps, except for basecalling
 workflow ELEMENT {
-    BASES2FASTQ() | toSortedList | flatten | collate(2) | ALIGN_TRIM_CONSENSUS
+    BASES2FASTQ("${params.element_input}") | toSortedList | flatten | collate(2) | ALIGN_TRIM_CONSENSUS
 
     MAPPED_UNMAPPED(ALIGN_TRIM_CONSENSUS.out.mapped_stats) | collect | MERGE_MAPPED_UNMAPPED
 

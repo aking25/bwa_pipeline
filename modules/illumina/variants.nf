@@ -23,6 +23,7 @@ process COUNT_VARIANTS {
     output:
     path "coverage_vs_n.pdf"
 
+    conda 'R conda-forge::r-tidyverse conda-forge::r-ggplot2 conda-forge::r-ggrepel'
     shell:
     '''
     variant_analysis.R !{qc_report} !{samples_tsv}

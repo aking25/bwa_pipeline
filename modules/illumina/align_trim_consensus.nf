@@ -5,7 +5,7 @@ process ALIGN_TRIM_CONSENSUS {
     publishDir "${params.out_dir}/logs/consensus_sequences"     , mode: 'link', pattern: '*_consensus.log'
     input:
     path reads
-
+    
     when:
     !(sample_id =~ /^Undetermined/)
 
@@ -19,12 +19,13 @@ process ALIGN_TRIM_CONSENSUS {
     path "${sample_id}_consensus.log"                                   , emit: log
     path "${sample_id}.fa"                                              , emit: fa
 
-    // conda 'ivar=1.4.2 bwa=0.7.17 samtools=1.9'
-    conda 'ivar=1.4.2'
+    conda 'bioconda::ivar=1.4.2 bioconda::bwa=0.7.17'
+    // conda 'ivar=1.4.2'
+    // container 'andersenlabapps/ivar'
     shell:
     sample_id = reads[0].toString().split('_')[0]
     '''
-    bwa mem -t !{params.threads} !{params.illumina.reference} !{reads[0]} !{reads[1]} | samtools view -Sb - | samtools sort - | samtools addreplacerg -r "ID:!{sample_id}" - | tee !{sample_id}.sorted.bam \
+    bwa mem -t !{params.threads} !{params.illumina.reference} !{reads[0]} !{reads[1]} | samtools view -b - | samtools sort - | samtools addreplacerg -r "ID:!{sample_id}" - | tee !{sample_id}.sorted.bam \
         | ivar trim -b !{params.bed_file} -x 3 -m 30 2> !{sample_id}.log | samtools sort - | tee !{sample_id}.trimmed.sorted.bam \
         | samtools mpileup -aa -A -Q 0 -d 0 --reference !{params.ref_fasta} - | tee !{sample_id}.pileup | ivar consensus -p !{sample_id}.fa -m 10 -n N -t 0.5 > !{sample_id}_consensus.log
     samtools stats !{sample_id}.sorted.bam > !{sample_id}.stats

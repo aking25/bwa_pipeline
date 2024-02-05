@@ -5,6 +5,7 @@ process QC_REPORT {
     path mapped_unmapped_report
     path sample_logs
 
+    conda 'pandas'
     output:
     path "qc_report.csv"
 

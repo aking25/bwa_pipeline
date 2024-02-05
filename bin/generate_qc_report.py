@@ -64,7 +64,8 @@ if __name__ == "__main__":
                 sample_data['quality_count'] = re.findall('\((\d+)\)', quality_line)[0]
             except:
                 print(f"Not able to collect trim information from log file: {fp}")
-            trim_df = trim_df.append(pd.Series(sample_data), ignore_index=True)
+            # trim_df = trim_df.append(pd.Series(sample_data), ignore_index=True)
+            trim_df = pd.concat([trim_df,pd.Series(sample_data).to_frame().T],ignore_index=True)
             print(trim_df)
     # Fuse trim information to create final QC dataframe
     qc_df = pd.merge(qc_df_tmp1, trim_df, on='SAMPLE_ID')
