@@ -18,8 +18,8 @@
 
 ### Nanopore
 
-1. Basecalling (`guppy`)
-2. Demultiplexing (`nanoplexer`)
+1. Basecalling (`dorado`)
+2. Demultiplexing (`dorado`)
 3. Filter reads (`artic guppyplex`)
 4. Call consensus (`artic minion`)
 5. Mapping/coverage stats (`samtools`)
@@ -46,18 +46,21 @@ Steps 2-7 are the same as Illumina steps
         * `ref_fasta`: reference file used for alignment
         * `reference`: prefix of output database (from bwa index)
     2. ont
-        * `fast5`: directory with fast5 files
+        * `fast5`: directory with fast5 files (optional if using pod5)
+        * `pod5`: directory with pod5 files (optional if using fast5)
         * `barcode_samplesheet`: Comma-separated file with barcodes and sample names (see `ont_samplesheet_example.csv`)
         * `ont_barcodes`: fasta file with barcodes used
         * `scheme_directory`: directory with primer schemes used in artic minion
         * `scheme`: scheme used in artic minion
-        * `guppy_path`: directory where guppy_basecaller is located 
-        * `guppy_config`: basecalling model for guppy based on library preparation kit 
         * `basecall_device`: basecalling device (*auto* or *cuda:\<device_id>*)
         * `min_readlen`: min read length for filtering
         * `max_readlen`: max read length for filtering
         * `medaka_model`: medaka model for artic minion
         * `normalize`: length to normalize reads
+        * `dorado_model`: path to dorado basecalling model
+        * `dorado_path`: directory where dorado executable is located
+        * `dorado_samplesheet`: samplesheet for dorado (see `dorado_samplesheet_example.csv`)
+        * `dorado_barcode_kit`: barcode kit to use for dorado demultiplexing (must be same as in `dorado_samplesheet`)
     3. element
         * `element_input`: directory with element sequencing data
         * *relies on Illumina options `gff3_file`, `ref_fasta`, `reference`*
@@ -68,14 +71,14 @@ Steps 2-7 are the same as Illumina steps
     ```
 
 ## Output
-Both illumina and ont produce the following directories:
+Both illumina/element and ont produce the following directories:
 * `consensus_sequences`: consensus sequences of samples
 * `merged_aligned_bams`: sorted bam files
 * `merged_fastq`: fastq files of samples
 * `reports`: mapping report
 * `trimmed_bams`: trimmed bam files and coverage report graph
 
-Illumina also produces two additional directories and files:
+Illumina/element also produces two additional directories and files:
 * `depth`: depth of samples
 * `logs`: logs from calling `iVar consensus`
 * `qc_report.csv`: quality report containing coverage, depth, mapping, trimming, and quality information

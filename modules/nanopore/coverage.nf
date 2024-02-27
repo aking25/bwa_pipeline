@@ -23,6 +23,7 @@ process MERGE_COVERAGE_STATS {
     path "coverage_report.tsv", emit: coverage_tsv
     path "coverage_report.png", emit: coverage_png
 
+    conda 'gnuplot'
     shell:
     '''
     echo -e "SAMPLE\tCOVERAGE\tAVG_DEPTH\tMIN\tMAX\tZERO_DEPTH" > coverage_report_unsorted.tsv
@@ -42,6 +43,7 @@ process MAPPED_UNMAPPED {
     output:
     path "${sample_id}_mapped_unmapped_report.tsv"
 
+    conda 'bioconda::samtools'
     shell:
     '''
     samtools stats !{sample_id}.sorted.bam > !{sample_id}.stats
