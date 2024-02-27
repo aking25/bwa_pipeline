@@ -1,5 +1,5 @@
 process TRIM_READS {
-    publishDir "${params.out_dir}/trimmed_bams/illumina", mode: 'link', pattern: '*.bam'
+    publishDir "${params.out_dir}/trimmed_bams/${params.platform}", mode: 'link', pattern: '*.bam'
     input:
     tuple val(sample), path(sorted_bam)
 
@@ -38,7 +38,7 @@ process COVERAGE_STATS {
 }
 
 process MERGE_COVERAGE_STATS {
-    publishDir "${params.out_dir}/trimmed_bams/illumina/reports", mode: 'link'
+    publishDir "${params.out_dir}/trimmed_bams/${params.platform}/reports", mode: 'link'
     input:
     path(reports)
 

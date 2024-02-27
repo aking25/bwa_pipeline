@@ -1,6 +1,6 @@
 process CALL_CONSENSUS {
-    publishDir "${params.out_dir}/consensus_sequences/illumina", mode: 'link', pattern: '*.fa'
-    publishDir "${params.out_dir}/logs/consensus_sequences", mode: 'link', pattern: '*.log'
+    publishDir "${params.out_dir}/consensus_sequences/${params.platform}", mode: 'link', pattern: '*.fa'
+    publishDir "${params.out_dir}/logs/consensus_sequences"              , mode: 'link', pattern: '*.log'
     input:
     tuple val(sample), path(trimmed_sorted_bam)
     
