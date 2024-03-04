@@ -1,5 +1,5 @@
 # BWA Pipeline
-
+Nextflow pipeline for processing raw sequencing data from Illumina, Oxford Nanopore Techonogoies, and Element Biosciences.
 ## Pipeline Summary
 
 ### Illumina
