@@ -11,6 +11,6 @@ process CALL_CONSENSUS {
     conda 'ivar=1.4.2'
     shell:
     '''
-    samtools mpileup -aa -A -Q 0 -d 0 !{trimmed_sorted_bam} | ivar consensus -p !{sample}.fa -m 10 -n N -t 0.5 > !{sample}.log
+    samtools mpileup -aa -A -B -Q 0 -d 0 !{trimmed_sorted_bam} | ivar consensus -p !{sample}.fa -m 10 -n N -t 0.5 > !{sample}.log
     '''
 }
