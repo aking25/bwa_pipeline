@@ -27,7 +27,7 @@ process ALIGN_TRIM_CONSENSUS {
     '''
     bwa mem -t !{params.threads} !{params.illumina.reference} !{reads[0]} !{reads[1]} | samtools view -b - | samtools sort - | samtools addreplacerg -r "ID:!{sample_id}" - | tee !{sample_id}.sorted.bam \
         | ivar trim -b !{params.bed_file} -x 3 -m 30 2> !{sample_id}.log | samtools sort - | tee !{sample_id}.trimmed.sorted.bam \
-        | samtools mpileup -aa -A -Q 0 -d 0 --reference !{params.ref_fasta} - | tee !{sample_id}.pileup | ivar consensus -p !{sample_id}.fa -m 10 -n N -t 0.5 > !{sample_id}_consensus.log
+        | samtools mpileup -aa -A -B -Q 0 -d 0 --reference !{params.ref_fasta} - | tee !{sample_id}.pileup | ivar consensus -p !{sample_id}.fa -m 10 -n N -t 0.5 > !{sample_id}_consensus.log
     samtools stats !{sample_id}.sorted.bam > !{sample_id}.stats
     samtools index !{sample_id}.trimmed.sorted.bam
     compute_coverage.sh !{sample_id}.trimmed.sorted.bam !{params.coding_region} > !{sample_id}_coverage.stats

@@ -1,4 +1,5 @@
 process BASES2FASTQ {
+    publishDir "${params.out_dir}/merged_fastq/${params.platform}", mode: 'link' 
     input:
     path runinfo
 
