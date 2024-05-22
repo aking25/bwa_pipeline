@@ -26,11 +26,11 @@ process MERGE_COVERAGE_STATS {
     conda 'gnuplot'
     shell:
     '''
-    echo -e "SAMPLE\tCOVERAGE\tAVG_DEPTH\tMIN\tMAX\tZERO_DEPTH" > coverage_report_unsorted.tsv
+    echo -e "SAMPLE\tCOVERAGE\tAVG_DEPTH\tMIN\tMAX\tZERO_DEPTH" > coverage_report.tsv
     for f in !{reports}; do
-        tail -n 1 $f >> coverage_report_unsorted.tsv
+        tail -n 1 $f >> coverage_report.tsv
     done
-    less coverage_report_unsorted.tsv | sort -k 1 > coverage_report.tsv
+    #less coverage_report_unsorted.tsv | sort -k 1 > coverage_report.tsv
     gnuplot -e "filename='coverage_report.tsv';ofilename='coverage_report.png';set terminal png size 3000,1000;\
         set output ofilename;set boxwidth 0.5;set style fill solid;set xtics rotate by 90 right noenhanced;plot filename using 2:xtic(1) with boxes" 
     '''
@@ -61,10 +61,10 @@ process MERGE_MAPPED_UNMAPPED {
 
     shell:
     '''
-    echo -e "SAMPLE\tmapped\tunmapped" > mapped_unmapped_report_unsorted.tsv
+    echo -e "SAMPLE\tmapped\tunmapped" > mapped_unmapped_report.tsv
     for f in !{reports}; do
-        tail -n 1 $f >> mapped_unmapped_report_unsorted.tsv
+        tail -n 1 $f >> mapped_unmapped_report.tsv
     done
-    less mapped_unmapped_report_unsorted.tsv | sort -k 1 > mapped_unmapped_report.tsv
+    #less mapped_unmapped_report_unsorted.tsv | sort -k 1 > mapped_unmapped_report.tsv
     '''
 }
