@@ -36,6 +36,8 @@ Steps 2-7 are the same as Illumina steps
     * `platform`: the sequencing platform (*illumina* or *ont*) 
     * `out_dir`: the directory to output the files to
     * `threads`: the number of threads to use
+    * `executor.cpus`: number of cpus per process
+    * `executor.maxForks`: maximum number of processes executed in parallel
     * `coding_region`: the coding region (default: *NC_045512.2:266-29674*)
 2. Set platform specific parameters:
     1. illumina
